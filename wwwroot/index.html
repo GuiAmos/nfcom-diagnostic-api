@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFCom (Mod. 62) - Agente de Diagnóstico SEFAZ</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --danger: #dc2626;
+      --danger-hover: #b91c1c;
+      --success: #16a34a;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    header h1 span {
+      font-size: 0.8rem;
+      background: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    input, textarea {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      color: var(--text);
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    textarea {
+      resize: vertical;
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    button {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, opacity 0.2s;
+      font-size: 0.875rem;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-clear {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .btn-clear:hover {
+      background: rgba(220, 38, 38, 0.1);
+      border-color: var(--danger);
+      color: #ef4444;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Área de Diagnóstico / Retorno */
+    .result-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-align: center;
+      border: 2px dashed var(--border);
+      border-radius: 0.5rem;
+      padding: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .badge-Cadastro { background: #3b82f6; color: white; }
+    .badge-CalculoTributario { background: var(--warning); color: black; }
+    .badge-RegraNegocio { background: #8b5cf6; color: white; }
+    .badge-ConfiguracaoAmbiente { background: var(--danger); color: white; }
+
+    .card-block {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+
+    .card-block h4 {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .divergencia-box {
+      border-left: 4px solid var(--danger);
+      background: rgba(220, 38, 38, 0.1);
+      padding: 0.75rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      font-size: 0.875rem;
+      color: #fca5a5;
+    }
+
+    ol {
+      margin-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+    }
+
+    pre {
+      background: #030712;
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      font-size: 0.75rem;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>NFCom Diagnostic <span>Modelo 62</span></h1>
+  </header>
+
+  <main>
+    <!-- COLUNA DA ESQUERDA: PARÂMETROS -->
+    <div class="panel">
+      <div class="panel-title">Parâmetros de Entrada</div>
+
+      <div class="form-group">
+        <label for="cStat">Código SEFAZ (cStat) *</label>
+        <input type="number" id="cStat" placeholder="Ex: 256, 215, 431..." />
+      </div>
+
+      <div class="form-group">
+        <label for="xMotivo">Mensagem de Retorno SEFAZ (xMotivo)</label>
+        <textarea id="xMotivo" rows="3" placeholder="Cole a mensagem de rejeição da SEFAZ..."></textarea>
+      </div>
+
+      <div class="form-group" style="flex: 1;">
+        <label for="jsonEnvio">Payload Enviado (JSON ou XML)</label>
+        <textarea id="jsonEnvio" style="flex: 1; min-height: 200px;" placeholder="Cole o JSON ou XML completo que foi enviado..."></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-clear" id="btnClear">Limpar</button>
+        <button type="button" class="btn-submit" id="btnSubmit">Analisar Erro</button>
+      </div>
+    </div>
+
+    <!-- COLUNA DA DIREITA: RETORNO/DIAGNÓSTICO -->
+    <div class="panel">
+      <div class="panel-title">Diagnóstico & Instrução Manual</div>
+
+      <div id="resultArea" class="result-container">
+        <div class="empty-state">
+          Informe o código de rejeição e clique em "Analisar Erro" para visualizar o diagnóstico.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const cStatInput = document.getElementById('cStat');
+    const xMotivoInput = document.getElementById('xMotivo');
+    const jsonEnvioInput = document.getElementById('jsonEnvio');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnClear = document.getElementById('btnClear');
+    const resultArea = document.getElementById('resultArea');
+
+    // Botão Limpar
+    btnClear.addEventListener('click', () => {
+      cStatInput.value = '';
+      xMotivoInput.value = '';
+      jsonEnvioInput.value = '';
+      resultArea.innerHTML = `
+        <div class="empty-state">
+          Informe o código de rejeição e clique em "Analisar Erro" para visualizar o diagnóstico.
+        </div>
+      `;
+      cStatInput.focus();
+    });
+
+    // Botão Analisar
+    btnSubmit.addEventListener('click', async () => {
+      const cStatVal = parseInt(cStatInput.value.trim(), 10);
+      if (!cStatVal || isNaN(cStatVal)) {
+        alert('Por favor, informe um código cStat válido.');
+        cStatInput.focus();
+        return;
+      }
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = 'Processando...';
+
+      let parsedJson = null;
+      const rawPayload = jsonEnvioInput.value.trim();
+      if (rawPayload) {
+        try {
+          parsedJson = JSON.parse(rawPayload);
+        } catch {
+          // Mantém null caso seja XML ou texto puro
+        }
+      }
+
+      const bodyData = {
+        cStat: cStatVal,
+        xMotivo: xMotivoInput.value.trim() || null,
+        jsonEnvio: parsedJson,
+        xmlContent: !parsedJson && rawPayload ? rawPayload : null
+      };
+
+      try {
+        const response = await fetch('/api/sefaz/analisar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bodyData)
+        });
+
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.mensagem || `Erro ${response.status}: Falha ao analisar requisição.`);
+        }
+
+        const data = await response.json();
+        renderResult(data);
+      } catch (err) {
+        resultArea.innerHTML = `
+          <div class="divergencia-box">
+            <strong>Falha na Requisição:</strong> ${err.message}
+          </div>
+        `;
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = 'Analisar Erro';
+      }
+    });
+
+    function renderResult(data) {
+      const divergenciasHtml = data.divergenciasDetectadas && data.divergenciasDetectadas.length > 0
+        ? `<div class="divergencia-box">
+             <strong>Atenção:</strong><br />
+             ${data.divergenciasDetectadas.map(d => `• ${escapeHtml(d)}`).join('<br />')}
+           </div>`
+        : '';
+
+      const passosHtml = data.passosParaCorrecao && data.passosParaCorrecao.length > 0
+        ? `<ol>${data.passosParaCorrecao.map(p => `<li>${p}</li>`).join('')}</ol>`
+        : '<p>Nenhum passo específico informado.</p>';
+
+      const exemploXmlHtml = data.exemploXmlEsperado
+        ? `<div class="card-block">
+             <h4>Exemplo Esperado</h4>
+             <pre><code>${escapeHtml(data.exemploXmlEsperado)}</code></pre>
+           </div>`
+        : '';
+
+      resultArea.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h2 style="font-size:1.1rem; font-weight:700;">${escapeHtml(data.titulo)}</h2>
+          <span class="badge badge-${data.severidade}">${data.severidade}</span>
+        </div>
+
+        ${divergenciasHtml}
+
+        <div class="card-block">
+          <h4>Causa Provável</h4>
+          <p style="font-size:0.875rem; color: #cbd5e1;">${escapeHtml(data.causaProvavel)}</p>
+        </div>
+
+        <div class="card-block">
+          <h4>Como Corrigir no ERP</h4>
+          ${passosHtml}
+        </div>
+
+        ${exemploXmlHtml}
+      `;
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

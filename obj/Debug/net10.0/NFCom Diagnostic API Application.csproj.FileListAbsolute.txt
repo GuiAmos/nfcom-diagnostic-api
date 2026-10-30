@@ -1,0 +1,37 @@
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.csproj.AssemblyReference.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.AssemblyInfoInputs.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.AssemblyInfo.cs
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.csproj.CoreCompileInputs.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.MvcApplicationPartsAssemblyInfo.cs
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.MvcApplicationPartsAssemblyInfo.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\appsettings.Development.json
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\appsettings.json
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.staticwebassets.endpoints.json
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.exe
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.deps.json
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.runtimeconfig.json
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.pdb
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\scopedcss\bundle\NFCom Diagnostic API Application.styles.css
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\staticwebassets.build.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\staticwebassets.development.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\swae.build.ex.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Di.1B9E1F9C.Up2Date
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\refint\NFCom Diagnostic API Application.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.pdb
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\NFCom Diagnostic API Application.genruntimeconfig.cache
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\ref\NFCom Diagnostic API Application.dll
+C:\Meus Projetos\NFCom Diagnostic API Application\bin\Debug\net10.0\NFCom Diagnostic API Application.staticwebassets.runtime.json
+C:\Meus Projetos\NFCom Diagnostic API Application\obj\Debug\net10.0\compressed\ma8agqz9jx-{0}-27yq6pf09r-27yq6pf09r.gz
